@@ -4,6 +4,7 @@ import argparse
 import json
 import sqlite3
 import subprocess
+import sys
 from contextlib import closing
 from pathlib import Path
 
@@ -16,10 +17,14 @@ def load(path):
     p = Path(path)
     if p.stat().st_size > 2_000_000:
         raise ValueError("Input exceeds the 2 MB limit")
-    return json.loads(p.read_text())
+    return json.loads(p.read_text(encoding="utf-8"))
 
 
 def main():
+    if sys.platform == "win32":
+        for stream in (sys.stdout, sys.stderr):
+            if hasattr(stream, "reconfigure"):
+                stream.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(
         prog="faultline", description="Trace distributed-system change impact"
     )

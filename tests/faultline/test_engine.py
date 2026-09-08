@@ -10,7 +10,7 @@ import pytest
 from faultline.contracts import compare
 from faultline.engine import agent_brief, analyze, path_seeds, validate
 
-DEMO = json.loads(Path("examples/commerce/topology.json").read_text())
+DEMO = json.loads(Path("examples/commerce/topology.json").read_text(encoding="utf-8"))
 
 
 def ids(report):
