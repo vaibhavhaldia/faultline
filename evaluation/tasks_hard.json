@@ -1,0 +1,82 @@
+[
+  {
+    "id": "fastapi-dependency-override-substitution",
+    "language": "python",
+    "fixture": "local_fastapi/fastapi",
+    "prompt": "Endpoints declare dependencies using a small factory function that just wraps its argument in a marker object; nothing about the callable itself is inspected there. Which function is this factory, and which attribute on the application instance later lets tests substitute a different callable for whatever marker ends up referencing it, without editing the endpoint's signature?",
+    "expected_files": ["param_functions.py", "applications.py"],
+    "expected_symbols": ["Depends", "dependency_overrides"],
+    "success_criteria": "dependency marker factory and override substitution",
+    "timeout": 300
+  },
+  {
+    "id": "fastapi-default-error-handler-wiring",
+    "language": "python",
+    "fixture": "local_fastapi/fastapi",
+    "prompt": "When incoming request data fails validation, the framework needs to convert that failure into a structured error the client can read, before any of the user's own error-handling code runs. Which exception class carries the validation failure detail, and which module supplies the coroutine that turns any unhandled instance of it into a response by default?",
+    "expected_files": ["exceptions.py", "applications.py"],
+    "expected_symbols": ["RequestValidationError", "request_validation_exception_handler"],
+    "success_criteria": "default exception handler registration",
+    "timeout": 300
+  },
+  {
+    "id": "fastapi-middleware-stack-assembly",
+    "language": "python",
+    "fixture": "local_fastapi/fastapi",
+    "prompt": "The full ASGI callable that actually serves requests isn't built until the app first needs it, and it wraps every registered layer around the router in order. Which method assembles that wrapped callable from the registered layers, and what attribute caches the result so it's only built once?",
+    "expected_files": ["applications.py"],
+    "expected_symbols": ["build_middleware_stack", "middleware_stack"],
+    "success_criteria": "middleware stack assembly and caching",
+    "timeout": 300
+  },
+  {
+    "id": "fastapi-security-graph-walk",
+    "language": "python",
+    "fixture": "local_fastapi/fastapi",
+    "prompt": "To build documentation, the system must discover all security needs for a route, even when they are hidden inside nested calls. Which traversal walks the graph with deduplication, which test decides if a node is a security requirement, and which aggregator produces the final definitions?",
+    "expected_files": ["openapi/utils.py", "security/oauth2.py"],
+    "expected_symbols": ["_get_openapi_dependency_data", "OAuth2PasswordBearer"],
+    "success_criteria": "security graph walk",
+    "timeout": 300
+  },
+  {
+    "id": "fastapi-after-response-queue",
+    "language": "python",
+    "fixture": "local_fastapi/fastapi",
+    "prompt": "Some work must run after the response is sent, even when the handler returns a Response that already carries its own background. Where is the queue type defined as a thin subclass, and how does the handler merge the per-request queue into the response without overwriting an existing one?",
+    "expected_files": ["background.py", "routing.py"],
+    "expected_symbols": ["BackgroundTasks", "get_request_handler"],
+    "success_criteria": "after-response queue merge",
+    "timeout": 300
+  },
+  {
+    "id": "fiber-route-pattern-compile-match",
+    "language": "go",
+    "fixture": "local_fiber/fiber",
+    "prompt": "A registered path containing named segments in curly braces gets compiled once, ahead of time, into an internal representation with precomputed segment boundaries so that matching an incoming request doesn't have to re-scan the pattern text. Which type holds that compiled representation, and which method call on it actually walks the incoming path to fill in the parameter values when a request arrives?",
+    "expected_files": ["path.go", "router.go"],
+    "expected_symbols": ["routeParser", "getMatch"],
+    "success_criteria": "compiled route pattern and request-time parameter match",
+    "timeout": 300
+  },
+  {
+    "id": "fiber-domain-mount-constraint",
+    "language": "go",
+    "fixture": "local_fiber/fiber",
+    "prompt": "An application can be attached under a parent using both a URL prefix and an optional hostname constraint. Which type parses and evaluates the hostname pattern to decide if an incoming request's Host header qualifies, and which method wires a child application into its parent's request-handling path together with that constraint?",
+    "expected_files": ["domain.go", "mount.go"],
+    "expected_symbols": ["domainMatcher", "mount"],
+    "success_criteria": "domain constraint parsing and sub-app mount wiring",
+    "timeout": 300
+  },
+  {
+    "id": "fastapi-event-stream-splitting",
+    "language": "python",
+    "fixture": "local_fastapi/fastapi",
+    "prompt": "For streaming, a single logical message with embedded newlines must become multiple wire lines, and a periodic comment must be sent. Which helper in the event module normalizes line endings and splits them, and which routing-layer function decides to enter the event-stream branch based on the response class?",
+    "expected_files": ["sse.py", "routing.py"],
+    "expected_symbols": ["_split_sse_lines", "get_request_handler"],
+    "success_criteria": "event stream splitting and branch",
+    "timeout": 300
+  }
+]

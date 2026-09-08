@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+/* Design system: "Ultramarine Classical Modernism"
+   Two rules carry the whole system: an unyielding Klein-ultramarine canvas,
+   and absolute zero-radius geometry bounded by exact 1px hairlines. */
+@theme {
+  --font-display: "Playfair Display", ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-sans: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Canvas: blue is the ambient environment, not an accent. */
+  --color-ultra: #0000f2;
+  --color-ultra-deep: #0000a3;
+  --color-ultra-navy: #00008a;
+  --color-paper: #ffffff;
+
+  /* White opacity tiers — the only "greys" the system allows on blue. */
+  --color-line: rgba(255, 255, 255, 0.25);
+  --color-line-strong: rgba(255, 255, 255, 0.45);
+  --color-dim: rgba(255, 255, 255, 0.72);
+  --color-dimmer: rgba(255, 255, 255, 0.45);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-ultra);
+}
+
+/* The nav is sticky and 56px tall, so an anchor jump would otherwise park the
+   section heading underneath it. */
+[id] {
+  scroll-margin-top: 4.5rem;
+}
+
+body {
+  background: var(--color-ultra);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Display serif: high-contrast humanist, never bold-by-default.
+   Playfair defaults to old-style (text) figures, which sit at varying
+   heights — "677" steps up and down, and the zero in "80.68%" reads as a
+   lowercase o. Lining + tabular figures are what statistics need. */
+.font-display {
+  font-optical-sizing: auto;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: "lnum" 1, "tnum" 1;
+}
+
+::selection {
+  background: #ffffff;
+  color: var(--color-ultra);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Index tag: "#01 PARSE" — uppercase, wide tracking, technical cataloguing. */
+.tag-index {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* Engraved radial burst.
+   The mask is a DONUT, not a disc: a conic gradient's wedges converge to
+   zero width at the centre, so a disc mask renders the middle as a solid
+   blown-out core (unreadable behind content). Punching the centre out
+   leaves clean, individually legible rays and gives content a quiet field. */
+.line-burst {
+  background-image: repeating-conic-gradient(
+    from var(--burst-from, 0deg),
+    var(--burst-color, rgba(255, 255, 255, 0.55)) 0deg 0.4deg,
+    transparent 0.4deg var(--burst-period, 6deg)
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at center,
+    transparent 0%,
+    transparent var(--burst-hole, 26%),
+    black calc(var(--burst-hole, 26%) + 14%),
+    transparent var(--burst-edge, 76%)
+  );
+  mask-image: radial-gradient(
+    circle at center,
+    transparent 0%,
+    transparent var(--burst-hole, 26%),
+    black calc(var(--burst-hole, 26%) + 14%),
+    transparent var(--burst-edge, 76%)
+  );
+}
+
+/* Blueprint grid — drafting-table ground for diagram windows. */
+.engraved-grid {
+  background-size: 20px 20px;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.09) 1px, transparent 1px);
+}
+
+.engraved-grid-blue {
+  background-size: 20px 20px;
+  background-image:
+    linear-gradient(to right, rgba(0, 0, 242, 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 242, 0.09) 1px, transparent 1px);
+}
+
+/* Connected-perimeter card matrix: borders abut on a 1px gutter so the grid
+   reads as one etched plate rather than detached floating cards. */
+.hairline-matrix {
+  gap: 1px;
+  background: var(--color-line);
+}
+
+.hairline-matrix-blue {
+  gap: 1px;
+  background: rgba(0, 0, 242, 0.25);
+}

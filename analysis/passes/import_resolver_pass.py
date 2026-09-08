@@ -1,0 +1,46 @@
+from analysis.build_result import BuildResult
+from analysis.import_resolution_builder import build_resolved_import
+from analysis.indexing_context import IndexingContext
+from analysis.semantic.import_resolver import resolve_import
+from analysis.semantic.import_symbol_resolver import resolve_imported_symbol
+
+
+def run_import_resolver_pass(
+    *,
+    context: IndexingContext,
+    result: BuildResult,
+):
+
+    for import_reference in result.import_references:
+        importing_document = context.document_index.lookup_by_id(
+            import_reference.document_id
+        )
+
+        if importing_document is None:
+            continue
+
+        documents = resolve_import(
+            import_reference=import_reference,
+            importing_document=importing_document,
+            document_index=context.document_index,
+            namespace_index=context.namespace_index,
+        )
+
+        if documents is None:
+            documents = []
+        elif not isinstance(documents, list):
+            documents = [documents]
+
+        for document in documents:
+            resolved_import = build_resolved_import(
+                import_reference=import_reference,
+                target_document=document,
+            )
+
+            resolved_import.target_symbol = resolve_imported_symbol(
+                resolved_import=resolved_import,
+                export_index=context.export_index,
+                symbol_index=context.symbol_index,
+            )
+
+            result.resolved_import_references.append(resolved_import)

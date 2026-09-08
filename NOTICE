@@ -1,0 +1,17 @@
+Faultline — distributed-system change-impact graph
+Original Faultline additions: Copyright (c) 2026 Vaibhav Haldia.
+These additions are provided under the MIT license terms in LICENSE.
+
+This distribution incorporates Symbolgraph:
+  https://github.com/Deepjyoti-Sarmah/symbolgraph
+  Copyright (c) 2026 Deepjyoti Sarmah
+  MIT License; the complete original notice is retained in LICENSE.
+
+Source: user-supplied symbolgraph-main.zip
+Archive commit identifier: abf78a26db02922fde4d8f676ef73ff7c3fced2e
+
+Original Faultline work is principally in faultline/, web/, tests/faultline/,
+examples/commerce/, and docs/FAULTLINE_*.md, with integration changes to
+packaging, README and CI. Symbolgraph's parsing, indexing, retrieval, graph,
+storage and session-memory engines remain attributed to their original author.
+Faultline is an independent derivative and does not imply upstream endorsement.

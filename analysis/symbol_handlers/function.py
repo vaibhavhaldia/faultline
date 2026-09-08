@@ -1,0 +1,30 @@
+from tree_sitter import Node
+
+from analysis.symbol_builder import build_symbol
+from models.entities.documents import Document
+from models.entities.symbol_kind import SymbolKind
+from models.entities.symbols import Symbol
+from parsing.node_text import node_text
+
+
+def handle_function(
+    *,
+    node: Node,
+    document: Document,
+    owner: Symbol | None,
+) -> Symbol | None:
+
+    name_node = node.child_by_field_name("name")
+
+    if name_node is None:
+        return None
+
+    name: str = node_text(name_node)
+
+    return build_symbol(
+        node=node,
+        name=name,
+        kind=SymbolKind.FUNCTION,
+        document=document,
+        owner=owner,
+    )

@@ -1,0 +1,11 @@
+{
+  "name": "io.github.vaibhavhaldia/faultline",
+  "title": "Faultline",
+  "description": "Evidence-based distributed-system change impact for AI coding agents. Run locally from source.",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/vaibhavhaldia/faultline",
+    "source": "github"
+  },
+  "packages": []
+}

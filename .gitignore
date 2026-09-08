@@ -1,0 +1,44 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Benchmark repo clones, if you re-clone them to reproduce the numbers
+# (SHAs pinned in benchmarks/PREREGISTRATION.md)
+local_fastapi/
+local_fiber/
+local_django/
+
+# Local index + coverage artifacts (never meant to be committed)
+.sg/
+.coverage
+.pytest_cache/
+
+# Root-level scratch dir, distinct from the tracked benchmarks/results/
+# (anchored so this does NOT also match benchmarks/results/)
+/results/
+
+# Claude Code machine-local state (permission overrides, task lock).
+.claude/settings.local.json
+.claude/scheduled_tasks.lock
+
+# Test/lint caches
+.hypothesis/
+.ruff_cache/
+
+# Faultline web and local tools
+web/node_modules/
+web/dist/
+web/out/
+web/.vite/
+web/.vercel/
+web/.wrangler/
+web/*.tsbuildinfo
+.hypothesis/
+/work/

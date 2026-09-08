@@ -1,0 +1,13 @@
+{
+  "relationship": 1.0,
+  "exact": 0.8,
+  "token_overlap": 0.35,
+  "graph_distance": 0.45,
+  "path": 0.3,
+  "kind": 0.2,
+  "fts": 0.1,
+  "vector": 0.1,
+  "test_example": -0.4,
+  "_trained_on": "evaluation/evaluation_repo FTS+graph grid 2026-09-03",
+  "_method": "grid search relationship/exact vs heuristic"
+}

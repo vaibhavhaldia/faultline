@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "name": "Mercury Commerce",
+  "nodes": [
+    {"id":"checkout","label":"Checkout","kind":"service","owner":"Commerce","paths":["services/checkout"],"tests":["Checkout → payment contract test","Checkout happy-path and rollback test"]},
+    {"id":"payments-api","label":"Payments API","kind":"api","owner":"Payments","paths":["contracts/payments.json"],"tests":["Payment response compatibility test"]},
+    {"id":"payments","label":"Payments","kind":"service","owner":"Payments","paths":["services/payments"],"tests":["Payment idempotency and retry test"]},
+    {"id":"orders-topic","label":"Order events","kind":"topic","owner":"Commerce","paths":["contracts/order-event.json"],"tests":["Order event schema compatibility test"]},
+    {"id":"fulfillment","label":"Fulfillment","kind":"service","owner":"Logistics","paths":["services/fulfillment"],"tests":["Order event replay test"]},
+    {"id":"notifications","label":"Notifications","kind":"service","owner":"Experience","paths":["services/notifications"],"tests":["Notification consumer contract test"]},
+    {"id":"ledger","label":"Ledger DB","kind":"database","owner":"Payments","paths":["migrations/ledger"],"tests":["Ledger migration backward compatibility test"]},
+    {"id":"analytics","label":"Analytics","kind":"service","owner":"Data","paths":["services/analytics"],"tests":["Analytics event ingestion test"]},
+    {"id":"catalog","label":"Catalog","kind":"service","owner":"Discovery","paths":["services/catalog"],"tests":["Catalog smoke test"]}
+  ],
+  "edges": [
+    {"source":"checkout","target":"payments-api","kind":"calls","evidence":"declared","location":"faultline.json: checkout payment dependency"},
+    {"source":"payments","target":"payments-api","kind":"implements","evidence":"declared","location":"contracts/payments.json: provider mapping"},
+    {"source":"payments","target":"ledger","kind":"writes","evidence":"declared","location":"faultline.json: ledger write ownership"},
+    {"source":"checkout","target":"orders-topic","kind":"publishes","evidence":"declared","location":"faultline.json: order publisher"},
+    {"source":"fulfillment","target":"orders-topic","kind":"consumes","evidence":"declared","location":"faultline.json: fulfillment subscription"},
+    {"source":"notifications","target":"orders-topic","kind":"consumes","evidence":"declared","location":"faultline.json: notification subscription"},
+    {"source":"analytics","target":"orders-topic","kind":"consumes","evidence":"inferred","location":"Example hypothesis: analytics subscription requires confirmation"},
+    {"source":"checkout","target":"catalog","kind":"calls","evidence":"declared","location":"faultline.json: catalog dependency"}
+  ]
+}
