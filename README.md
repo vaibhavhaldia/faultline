@@ -4,7 +4,7 @@
 
 Faultline connects code changes to services, API contracts, event topics and databases. Select a change, trace potential downstream consequences, inspect the evidence and hand an agent a verification plan.
 
-Created by **Vaibhav Haldia**, extending the MIT-licensed project. This is a derivative project with a new system-impact layer.
+Extending the existing MIT-licensed project. This is a derivative project with a new system-impact layer.
 
 ## What is original
 
@@ -138,4 +138,4 @@ This release is a functional topology-driven workbench, not an automatic product
 
 ## License
 
-MIT. The original `LICENSE` is retained verbatim, including **Copyright (c) 2026 Vaibhav Haldia**. `NOTICE` identifies the original archive and Vaibhav Haldia's additions. Upstream benchmarks are historical upstream claims and do not measure Faultline's system-impact layer.
+MIT. The original `LICENSE` is retained verbatim, including **Copyright (c) 2026**. `NOTICE` identifies the original archive and my additions. Upstream benchmarks are historical upstream claims and do not measure Faultline's system-impact layer.
