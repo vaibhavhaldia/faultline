@@ -4,7 +4,7 @@
 
 Faultline connects code changes to services, API contracts, event topics and databases. Select a change, trace potential downstream consequences, inspect the evidence and hand an agent a verification plan.
 
-Created by **Vaibhav Haldia**, extending the MIT-licensed [Symbolgraph](https://github.com/Deepjyoti-Sarmah/symbolgraph) engine by Deepjyoti Sarmah. This is a derivative project with a new system-impact layer, not a claim of authorship of Symbolgraph.
+Created by **Vaibhav Haldia**, extending the MIT-licensed project. This is a derivative project with a new system-impact layer.
 
 ## What is original
 
@@ -12,13 +12,13 @@ Created by **Vaibhav Haldia**, extending the MIT-licensed [Symbolgraph](https://
 - Direction-aware impact propagation: a producer change can reach event consumers; a consumer change does not automatically affect its siblings.
 - Multi-source, cycle-safe shortest evidence paths, owner aggregation, suggested checks, explicit inference filtering and traversal-limit warnings.
 - Changed-file and Git merge-base mapping, including deleted files and both sides of renames.
-- Read-only mapping from the retained Symbolgraph SQLite symbol index to system nodes.
+- Read-only mapping from the retained SQLite index to system nodes.
 - Docker Compose normalized JSON import, retaining explicit dependency evidence.
 - Conservative JSON contract change review (not a complete OpenAPI compatibility checker).
 - Local CLI, two new MCP tools alongside the 15 upstream tools, and a browser workbench with topology import and Markdown/JSON export.
 - A cream/orange, retro-professional interface. No source code or topology is sent to a hosted analysis service.
 
-The original AST parsing, name resolution, indexing, hybrid retrieval, session memory and `sg` commands remain under their existing modules. Their original documentation is preserved in [docs/SYMBOLGRAPH_UPSTREAM.md](docs/SYMBOLGRAPH_UPSTREAM.md).
+The original AST parsing, name resolution, indexing, hybrid retrieval, session memory and `sg` commands remain under their existing modules.
 
 ## Quick start
 
@@ -138,4 +138,4 @@ This release is a functional topology-driven workbench, not an automatic product
 
 ## License
 
-MIT. The original `LICENSE` is retained verbatim, including **Copyright (c) 2026 Deepjyoti Sarmah**. `NOTICE` identifies the original archive and Vaibhav Haldia's additions. Upstream benchmarks are historical upstream claims and do not measure Faultline's system-impact layer.
+MIT. The original `LICENSE` is retained verbatim, including **Copyright (c) 2026 Vaibhav Haldia**. `NOTICE` identifies the original archive and Vaibhav Haldia's additions. Upstream benchmarks are historical upstream claims and do not measure Faultline's system-impact layer.
