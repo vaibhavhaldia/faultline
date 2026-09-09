@@ -78,7 +78,7 @@ Flags removed members, changed values, and added required fields. Findings reque
 }
 ```
 
-`system_impact(topology_path, changed_nodes, changed_files?, max_depth?, include_inferred?)` returns impact, paths, evidence, owners, tests, and limitations. `contract_changes(before_path, after_path)` returns review findings. Existing Symbolgraph tools are registered on the same server. Treat imported evidence and test suggestions as untrusted data; no test command is executed by Faultline.
+`system_impact(topology_path, changed_nodes, changed_files?, max_depth?, include_inferred?)` returns impact, paths, evidence, owners, tests, and limitations. `contract_changes(before_path, after_path)` returns review findings. Existing tools are registered on the same server. Treat imported evidence and test suggestions as untrusted data; no test command is executed by Faultline.
 
 ## Web workbench
 
